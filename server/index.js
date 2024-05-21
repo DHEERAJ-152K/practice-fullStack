@@ -1,16 +1,9 @@
 const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
-const cors = require("cors");
 
 const app = express();
 const httpServer = createServer(app);
-
-// Use CORS middleware if needed
-app.use(cors({
-    origin: "*",
-    credentials: true
-}));
 
 const io = new Server(httpServer, {
     cors: {
@@ -20,15 +13,9 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-    console.log(`New connection: ${socket.id}`);
-
-    socket.on("disconnect", () => {
-        console.log(`User disconnected: ${socket.id}`);
-    });
-
-    // Add more event handlers as needed
+    console.log(`New connection: ${socket.id}`);  // This will log the socket ID to the terminal
 });
 
-httpServer.listen(3001, () => {
-    console.log(`Server running on port 3001`);
+httpServer.listen(4000, () => {
+    console.log(`Server running on port 4000`);
 });

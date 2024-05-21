@@ -12,7 +12,9 @@ button{
 }
 
 form{
-  position:absolute;
-  bottom: 10px;
+  position:relative;
+  display: flex;
+  justify-content: center;
+  bottom: -30rem;
   left: 15px;
 }

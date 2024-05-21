@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import './App.css';
 const { io } = require('socket.io-client');
-const socket = io("http://localhost:3000");
+const socket = io("http://localhost:4000");
 
 function App() {
   useEffect(() => {
     socket.on("connect", () => {
-      console.log(socket.id);
+      console.log(`Connected with ID: ${socket.id}`);
     });
 
     return () => {
