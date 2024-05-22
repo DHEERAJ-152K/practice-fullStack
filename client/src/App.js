@@ -6,11 +6,11 @@ const socket = io("http://localhost:4000");
 function App() {
 
   const [messages, setMessages]=useState('');
+  const [prevMsg, SetPrevMsg]= useState('');
 
  
-  const sendText=(e)=>{
+  const sendText=(e)=>{   //sending the message to server
     e.preventDefault();
-
     socket.emit("messages", messages);
     setMessages('');
   }
@@ -20,21 +20,18 @@ function App() {
       console.log(`Connected with ID: ${socket.id}`);
     });
 
-    socket.on("message", (msg) => {
-      setMessages((prevMessages) => [...prevMessages, msg]); // Add received message to messages array
-    });
+    socket.on('messages',(msg)=>{   //catching the message from server
+      console.log(msg);
+    })
 
     return () => {
-      socket.off("connect");
-      socket.off("message");
-
     };
   }, []);
 
   return (
     <div className="App">
       <h2>Messenger.io</h2>
-      <p>{messages}</p>
+      <p></p>
       <form onSubmit={sendText}>
 
         <input type='text' placeholder="Enter the message"

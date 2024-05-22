@@ -13,12 +13,15 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-    console.log(`New connection: ${socket.id}`);
+    console.log(`New connections: ${socket.id}`);
   
-    socket.on("message", (message) => {
+    socket.on("messages", (message) => {
       console.log(`Received message: ${message}`);
-      io.emit("message", message); // Broadcast the message to all connected clients
+      
+      socket.emit("messages", message);
     });
+
+    
 });
 
 httpServer.listen(4000, () => {
