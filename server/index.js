@@ -1,6 +1,7 @@
 const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
+const cors=require('cors');
 
 const app = express();
 const httpServer = createServer(app);
@@ -18,7 +19,7 @@ io.on("connection", (socket) => {
     socket.on("messages", (message) => {
       console.log(`Received message: ${message}`);
       
-      socket.emit("messages", message);
+      io.emit("messages", message);
     });
 
     
